@@ -1,0 +1,299 @@
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 40px;
+}
+
+.default-dice {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black
+}
+
+body {
+  color: black;
+  background-color: #355c7d;
+}
+
+.goti-img {
+  width: 45px;
+  height: 45px;
+}
+
+#board > .cells {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 48px;
+  border: 2px solid black;
+  text-align: center;
+  font-size: 30px;
+  z-index: 0;
+  position: relative;
+}
+
+.goti-img {
+  z-index: 3;
+}
+
+#board > .img {
+  z-index: 1;
+  position: absolute;
+}
+
+#board #ladder-0 {
+  width: 100px;
+  height: 130px;
+  top: 18px;
+  left: 100px;
+  transform: rotate(-5deg);
+}
+
+#board #ladder-1 {
+  width: 80px;
+  height: 200px;
+  right: 130px;
+  bottom: 40px;
+  transform: rotate(45deg);
+}
+
+#board #ladder-2 {
+  width: 120px;
+  height: 300px;
+  bottom: 20px;
+  left: 50px;
+}
+
+#board #ladder-3 {
+  width: 100px;
+  height: 280px;
+  left: 200px;
+  transform: rotate(10deg);
+}
+
+#board #ladder-4 {
+  width: 80px;
+  height: 80px;
+  bottom: 60px;
+  left: 180px;
+  transform: rotate(0deg);
+}
+
+#board #snake-0 {
+  width: 100px;
+  height: 150px;
+  bottom: 70px;
+}
+
+#board #snake-1 {
+  width: 100px;
+  height: 250px;
+  right: 50px;
+  top: 80px;
+  transform: rotate(5deg);
+}
+
+#board #snake-2 {
+  width: 100px;
+  height: 250px;
+  top: 5px;
+  left: 10px;
+}
+
+#board #snake-3 {
+  width: 200px;
+  height: 350px;
+  bottom: 195px;
+  right: 80px;
+  transform: rotate(20deg);
+}
+
+#board #snake-4 {
+  width: 100px;
+  height: 120px;
+  transform: rotate(180deg);
+  bottom: 20px;
+  right: 30px;
+}
+
+#board #snake-5 {
+  width: 100px;
+  height: 120px;
+  bottom: 10px;
+  left: 10px;
+}
+
+#board #snake-6 {
+  width: 200px;
+  height: 120px;
+  transform: rotate(250deg);
+  right: 250px;
+  top: 180px;
+}
+
+#board > .color-0 {
+  background-color: #488a99;
+}
+
+#board > .color-1 {
+  background-color: #7e9094;
+}
+
+#board {
+  width: 550px;
+  height: 550px;
+  margin: 0px auto;
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  position: relative;
+}
+
+#board-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#dice-container {
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  #chance {
+    color: white;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .default-dice {
+    width: 80px;
+    height: 80px;
+  }
+
+  .goti-img {
+    width: 35px;
+    height: 35px;
+  }
+
+  #board > .cells {
+    height: 38px;
+    width: 38px;
+    font-size: 20px;
+  }
+
+  #board {
+    width: 400px;
+    height: 400px;
+    grid-template-columns: repeat(10, 40px);
+  }
+
+  #board #ladder-0 {
+    width: 80px;
+    height: 100px;
+    top: 15px;
+    left: 80px;
+  }
+
+  #board #ladder-1 {
+    width: 30px;
+    height: 150px;
+    right: 85px;
+    bottom: 10px;
+  }
+
+  #board #ladder-2 {
+    width: 100px;
+    height: 240px;
+    bottom: -10px;
+    left: 40px;
+  }
+
+  #board #ladder-3 {
+    width: 80px;
+    height: 220px;
+    left: 160px;
+    top: 2px;
+  }
+
+  #board #ladder-4 {
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    left: 148px;
+  }
+
+  #board #snake-0 {
+    width: 80px;
+    height: 120px;
+    bottom: 28px;
+    transform: rotate(-10deg);
+  }
+
+  #board #snake-1 {
+    width: 80px;
+    height: 200px;
+    right: 40px;
+    top: 60px;
+  }
+
+  #board #snake-2 {
+    width: 80px;
+    height: 200px;
+    top: 4px;
+    left: 8px;
+  }
+
+  #board #snake-3 {
+    width: 155px;
+    height: 280px;
+    bottom: 155px;
+    right: 25px;
+    top: 5px;
+  }
+
+  #board #snake-4 {
+    width: 70px;
+    height: 95px;
+    bottom: 1px;
+    right: 5px;
+  }
+
+  #board #snake-5 {
+    width: 80px;
+    height: 95px;
+    bottom: 8px;
+    left: 8px;
+    
+  }
+
+  #board #snake-6 {
+    width: 160px;
+    height: 95px;
+    right: 150px;
+    top: 145px;
+  }
+
+  #dice-container {
+    width: 120px;
+    margin: 0 auto;
+  }
+
+  .main-container {
+    flex-direction: column;
+  }
+}
