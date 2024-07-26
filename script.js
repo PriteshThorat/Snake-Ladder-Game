@@ -2,12 +2,23 @@ const board = document.getElementById("board");
 const output = document.getElementById("output");
 const diceBtn = document.getElementById("dice-button");
 const chance = document.getElementById("chance");
+const aiPlay = document.getElementById("ai-play");
+const player2Play = document.getElementById("player2-play");
+const player3Play = document.getElementById("player3-play");
+const player4Play = document.getElementById("player4-play");
+const playGotiDiv = document.getElementById("play-goti-div");
 
+let isAtOne = true;
+let count = 0;
+let isAI = false;
+let limit;
 let win = false;
-let currentPosition = [1, 1];
+let currentPosition = [1, 1, 1, 1];
 let clearGotiArr = {
-  user: [],
-  ai: []
+  ai: [],
+  user2: [],
+  user3: [],
+  user4: []
 };
 
 
@@ -44,7 +55,9 @@ const img = {
   ],
   gotiSrc: [
     "https://i.imgur.com/M78bYNR.png",
-    "https://i.imgur.com/nkleeOi.png"
+    "https://i.imgur.com/nkleeOi.png",
+    "https://i.imgur.com/OpeB2RM.png",
+    "https://i.imgur.com/1TLAx2w.png"
   ]
 };
 
@@ -55,23 +68,6 @@ const snakeObj = {
 const ladderObj = {
   inLadder: [3, 14, 16, 56, 78],
   outLadder: [58, 32, 25, 95, 97]
-};
-
-const resetBoardNo = () => {
-  let number = 100;
-    for (let i = 0; i < 10; i++) {
-      for (let j = 0; j < 10; j++) {
-        const cell = document.getElementById(`${number}`);
-      if (i % 2 === 0) {
-        cell.textContent = number - j;
-        console.log(number - j);
-      } else {
-        cell.textContent = number - (10 - 1 - j);
-        console.log(number - (10 - 1 - j));
-      }
-      }
-      number -= 10;
-  }
 };
 
 const boardNo = () => {
@@ -105,11 +101,10 @@ const boardArray = () => {
   defaultPosition(0);
 };
 
-const tryFn = () => {
-    //isTryed = true;
-    defaultPosition(1);
-    diceFn(1);
-    chance.textContent = "Your Try!"
+const tryFn = (limit) => {
+  if (limit === 0) {
+    isAI = true;
+  }
 };
 
 const flagPosition = () => {
@@ -168,11 +163,15 @@ const diceFn = (index) => {
     if (currentPosition[index] === parseInt(element.id)) {
       
       
-      const { user, ai } = clearGotiArr;
+      const { ai, user2, user3, user4 } = clearGotiArr;
       if (index === 0) {
-        clearGotiImg(user);
-      } else {
         clearGotiImg(ai);
+      } else if (index === 1) {
+        clearGotiImg(user2);
+      } else if (index === 2) {
+        clearGotiImg(user3);
+      } else if (index === 3) {
+        clearGotiImg(user4);
       }
       
       console.log(`Position: ${currentPosition[index]}`);
@@ -194,23 +193,43 @@ const diceFn = (index) => {
   }
     }
   });
-  if (currentPosition[0] === 100) {
-    win = true;
-    alert("Congrats!, You Win");
+  if ((currentPosition[0] === 100 && 
+      limit !== 0) ||
+      currentPosition[1] === 100 || 
+      currentPosition[2] === 100 ||
+      currentPosition[3] === 100) {
+    //win = true;
+    alert(`Congrats!, Player${index + 1} Win`);
     reset();
-  } else if (currentPosition[1] === 100) {
-    win = false;
+  } else if (currentPosition[0] === 100 && limit === 0) {
+    //win = false;
     alert("Ohh!, You Lost");
     reset();
   }
 };
 
 const reset = () => {
-  clearGotiImg(clearGotiArr.user);
+  const mainContainer = document.querySelector(".main-container");
+  const playDiv = document.querySelector(".play-div");
+
+  mainContainer.style.display = "none";
+  playDiv.style.display = "flex";
+
+  isAtOne = true;
+  count = 0;
+  isAI = false;
+
+  board.innerText = "";
+  boardArray();
+
   clearGotiImg(clearGotiArr.ai);
-  resetBoardNo();
-  currentPosition = [1, 1];
+  clearGotiImg(clearGotiArr.user2);
+  clearGotiImg(clearGotiArr.user3);
+  clearGotiImg(clearGotiArr.user4);
+  currentPosition = [1, 1, 1, 1];
   defaultDice();
+  defaultPosition(3);
+  defaultPosition(2);
   defaultPosition(1);
   defaultPosition(0);
   const flagImg = document.getElementById("100");
@@ -269,6 +288,14 @@ const ladder = (index, tryIndex) => {
   return;
 };
 
+const showBoard = () => {
+  const mainContainer = document.querySelector(".main-container");
+  const playDiv = document.querySelector(".play-div");
+  mainContainer.style.display = "none";
+  playDiv.style.display = "none";
+  playGotiDiv.style.display = "flex";
+}
+
 const diceImgFn = (arr) => {
   const { dice } = img;
   dice.forEach((element, index) => {
@@ -280,16 +307,116 @@ const diceImgFn = (arr) => {
   });
 };
 
+const playerGotiFn = () => {
+  if (limit !== 0) {
+    for (let i = 0; i <= limit; i++) {
+    playGotiDiv.innerHTML += `
+    <div>
+      <img class="goti-img" src="${img.gotiSrc[i]}">
+      <span>Player ${i + 1}</span>
+    </div>
+  `;
+  }
+  } else {
+    playGotiDiv.innerHTML = `
+    <div>
+      <img class="goti-img" src="${img.gotiSrc[0]}">
+      <span>You</span>
+    </div>
+    <div>
+      <img class="goti-img" src="${img.gotiSrc[1]}">
+      <span>AI</span>
+    </div>
+  `;
+  }
+};
+
 window.addEventListener('load', () => {
     boardArray();
 });
 
+aiPlay.addEventListener("click" , () => {
+  limit = 0;
+  console.log(`limit: ${limit}`);
+  playerGotiFn();
+  showBoard();
+  tryFn(limit);
+});
+
+player2Play.addEventListener("click" , () => {
+  limit = 1;
+
+  playerGotiFn();
+  showBoard();
+  tryFn(limit);
+});
+
+player3Play.addEventListener("click" , () => {
+  limit = 2;
+
+  playerGotiFn();
+  showBoard();
+  tryFn(limit);
+});
+
+player4Play.addEventListener("click" , () => {
+  limit = 3;
+
+  playerGotiFn();
+  showBoard();
+  tryFn(limit);
+});
+
 diceBtn.addEventListener("click", () => {
-  diceFn(0);
-  if (win === false) {
+  if (isAI) {
+    diceFn(limit);
     chance.textContent = "AI's Try!";
+    if (isAtOne) {
+      isAtOne = false;
+      
+      defaultPosition(limit + 1);
+    }
     setTimeout( function() {
-      tryFn();
+      diceFn(limit + 1);
+      chance.textContent = "Your Try!"
     }, 1000);
+  } else {
+    console.log(`count: ${count}`);
+    console.log(`limit: ${limit}`);
+    if (count === 0 && count < limit) {
+      diceFn(count);
+      count++;
+      chance.textContent = "2nd Player Try!";
+    } else if (count === 1 && count < limit) {
+      diceFn(count);
+      count++;
+      chance.textContent = "3rd Player Try!";
+    } else if (count === 2 && count < limit) {
+      diceFn(count);
+      count++;
+      chance.textContent = "4th Player Try!";
+    } else {
+      isAtOne = false;
+
+      diceFn(count);
+      count = 0;
+      chance.textContent = "1st Player Try!";
+    }
+  }
+  if (isAtOne && limit !== 0) {
+    defaultPosition(count);
+  }
+});
+
+playGotiDiv.addEventListener("click", () => {
+  playGotiDiv.style.display = "none";
+  const mainContainer = document.querySelector(".main-container");
+  mainContainer.style.display = "flex";
+  if (limit === 0) {
+    console.log(`limit: ${limit}`);
+    chance.textContent = "Your Try!";
+  } else {
+    console.log(`limit: ${limit}`);
+    chance.textContent = "1st Player Try!";
   }
 });
