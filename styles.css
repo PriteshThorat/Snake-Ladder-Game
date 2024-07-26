@@ -1,7 +1,59 @@
+.play-div {
+  width: 400px;
+  height: 200px;
+  background-color: white;
+  margin: 0 auto;
+  display: flex; /*flex*/
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: url("https://i.imgur.com/pRqUUWg.png");
+}
+
+#play-goti-div {
+  width: 400px;
+  height: 200px;
+  background-color: white;
+  margin: 0 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: url("https://i.imgur.com/pRqUUWg.png");
+  display: none;
+}
+
+#play-goti-div > div{
+  display: flex;
+  width: 150px;
+  height: 80px;
+  font-size: 30px;
+}
+
+#play-goti-div > button {
+  width: 150px;
+  height: 60px;
+  font-size: 30px;
+}
+
+.play-div > button {
+  width: 150px;
+  height: 80px;
+  font-size: 30px;
+  background-color: transparent;
+}
+
 h1 {
   color: white;
   text-align: center;
   font-size: 40px;
+}
+
+#chance {
+  color: white;
 }
 
 .default-dice {
@@ -31,10 +83,6 @@ body {
   font-size: 30px;
   z-index: 0;
   position: relative;
-}
-
-.goti-img {
-  z-index: 3;
 }
 
 #board > .img {
@@ -166,16 +214,12 @@ body {
 }
 
 .main-container {
-  display: flex;
+  display: none; /*flex*/
   flex-direction: row;
   justify-content: center;
 }
 
 @media (max-width: 600px) {
-  #chance {
-    color: white;
-  }
-
   h1 {
     font-size: 30px;
   }
