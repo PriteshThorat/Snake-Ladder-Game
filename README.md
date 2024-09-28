@@ -20,3 +20,6 @@ This is a classic Snake and Ladder game built using JavaScript. The game is play
 3. If the player lands on the bottom of a ladder, they are moved up to the top of the ladder.
 4. If the player lands on the head of a snake, they are moved down to the tail of the snake.
 5. The first player to reach the final square on the board wins the game.
+
+## Deployed Website
+You can access the deployed website [here](https://priteshthorat.github.io/Snake-Ladder-Game/).
